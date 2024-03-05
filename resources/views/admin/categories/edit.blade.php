@@ -10,10 +10,18 @@
             @csrf
             @method('PUT')
             <div class="mb-4">
-                <label for="name" class="block text-gray-300 dark:text-gray-400 text-sm font-semibold mb-2">Category Name:</label>
-                <input type="text" name="name" class="appearance-none border rounded w-full py-2 px-3 text-gray-900 dark:text-gray-100 leading-tight focus:outline-none focus:shadow-outline" id="name" value="{{ $category->name }}" required>
+                <label for="name" class="block text-gray-300 dark:text-gray-400 text-sm font-semibold mb-2">Category
+                    Name:</label>
+                <input type="text" name="name"
+                    class="appearance-none border rounded w-full py-2 px-3 text-gray-900 dark:text-gray-100 leading-tight focus:outline-none focus:shadow-outline"
+                    id="name" value="{{ $category->name }}" required>
             </div>
-            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out">Submit</button>
+            <img src="{{ $category->image_url }}" alt="Category Image">
+
+            <input type="file" name="image">
+
+            <button type="submit"
+                class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out">Submit</button>
         </form>
     </div>
 </x-app-layout>

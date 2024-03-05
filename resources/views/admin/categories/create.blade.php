@@ -12,6 +12,8 @@
                 <label for="name">Category Name:</label>
                 <input type="text" name="name" class="form-control" id="name" required>
             </div>
+            <input type="file" name="image">
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

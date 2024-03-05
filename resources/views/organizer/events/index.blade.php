@@ -27,6 +27,8 @@
                                 <th class="dark:text-white">End Time</th>
                                 <th class="dark:text-white">Location</th>
                                 <th class="dark:text-white">Available Seats</th>
+                                <th class="dark:text-white">Category</th>
+                                <th class="dark:text-white">Accepted</th>
                                 <th class="dark:text-white">Validated</th>
                                 <th class="dark:text-white">Actions</th>
                             </tr>
@@ -40,6 +42,14 @@
                                     <td class="dark:text-white">{{ $event->end_time }}</td>
                                     <td class="dark:text-white">{{ $event->location }}</td>
                                     <td class="dark:text-white">{{ $event->available_seats }}</td>
+                                    <td class="dark:text-white">{{ $event->category->name }}</td>
+                                    <td class="dark:text-white">
+                                        @if ($event->auto_accept_reservation)
+                                            <p class="text-green-600 dark:text-green-400">Auto Reservation</p>
+                                        @else
+                                            <p class="text-red-600 dark:text-red-400">Manual Reservation</p>
+                                        @endif
+                                    </td>
                                     <td class="dark:text-white">{{ $event->validated ? 'Yes' : 'No' }}</td>
                                     <td>
                                         <a href="{{ route('organizer.events.edit', $event) }}"

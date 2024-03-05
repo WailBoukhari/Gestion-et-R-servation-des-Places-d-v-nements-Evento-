@@ -5,35 +5,42 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
 class UserFactory extends Factory
 {
     /**
-     * The current password being used by the factory.
+     * The name of the factory's corresponding model.
+     *
+     * @var string
      */
-    protected static ?string $password;
+    protected $model = User::class;
 
     /**
      * Define the model's default state.
      *
-     * @return array<string, mixed>
+     * @return array
      */
     public function definition()
     {
         $roles = [
-            'admin' => 'admin.com',
-            'organizer' => 'organizer.com',
-            'user' => 'user.com',
+            'organizer',
+            'user',
         ];
 
-        $role = $this->faker->randomElement(array_keys($roles));
+        $role = $this->faker->randomElement($roles);
+
+        // Find or create role
+        Role::findByName($role) ?? Role::create(['name' => $role]);
+
+        // Generate email based on name and role
+        $name = $this->faker->unique()->userName;
+        $email = str_replace('.', '_', $name) . '@' . $role . '.com';
 
         return [
-            'name' => $this->faker->name,
-            'email' => $this->faker->unique()->userName . '@' . $roles[$role],
+            'name' => $name,
+            'email' => $email,
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),

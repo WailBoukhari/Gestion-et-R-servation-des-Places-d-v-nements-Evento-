@@ -24,8 +24,8 @@
                         <a href="{{ route('admin.dashboard') }}"
                             class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
                     @endrole
-                    @role('orgnaizer')
-                        <a href="{{ route('orgnaizer.dashboard') }}"
+                    @role('organizer')
+                        <a href="{{ route('organizer.dashboard') }}"
                             class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
                     @endrole
                     @role('user')

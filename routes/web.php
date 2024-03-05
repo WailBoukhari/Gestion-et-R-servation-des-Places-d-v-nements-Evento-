@@ -3,8 +3,10 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -65,11 +67,27 @@ Route::middleware('auth')->group(function () {
     Route::get('/organizer/events/{event}/edit', [EventController::class, 'edit'])->name('organizer.events.edit');
     Route::put('/organizer/events/{event}', [EventController::class, 'update'])->name('organizer.events.update');
     Route::delete('/organizer/events/{event}', [EventController::class, 'destroy'])->name('organizer.events.destroy');
+    Route::get('/organizer/reservations', [ReservationController::class, 'index'])->name('organizer.reservations.index');
+    Route::post('/organizer/reservations/{reservation}/accept', [ReservationController::class, 'accept'])->name('organizer.reservations.accept');
+
 });
 Route::middleware('auth')->group(function () {
     Route::get('/user/dashboard', function () {
         return view('user.dashboard');
     })->name('user.dashboard');
+    Route::get('/user/reservations', [ReservationController::class, 'indexUsr'])->name('user.reservations.index');
+    Route::delete('/user/reservations/{reservations}', [ReservationController::class, 'destroy'])->name('user.reservations.destroy');
+
+
 });
+
+//search
+Route::get('/events/search/ajax', [EventController::class, 'searchAjax'])->name('events.search.ajax');
+Route::get('/events/search/result', [EventController::class, 'searchResult'])->name('events.searchResult');
+
+
+//revervation
+Route::post('/events/{event}/reserve', [ReservationController::class, 'reserve'])->name('events.reserve');
+
 require __DIR__ . '/auth.php';
 

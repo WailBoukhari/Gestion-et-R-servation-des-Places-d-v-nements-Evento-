@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->string('image')->nullable();
             $table->string('title');
             $table->text('description');
             $table->dateTime('start_time');
@@ -22,6 +23,7 @@ return new class extends Migration
              $table->boolean('validated')->default(false);
             $table->unsignedBigInteger('organizer_id');
             $table->foreign('organizer_id')->references('id')->on('users')->onDelete('cascade');
+            $table->boolean('auto_accept_reservation')->default(true);
             $table->timestamps();
         });
     }
