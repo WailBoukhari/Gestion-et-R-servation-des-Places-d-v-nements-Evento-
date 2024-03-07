@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->boolean('accepted')->default(false);
+            $table->binary('qr_code')->nullable();
             $table->timestamps();
         });
     }

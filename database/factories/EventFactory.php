@@ -30,8 +30,9 @@ class EventFactory extends Factory
         $startDateTime = $this->faker->dateTimeBetween('+1 week', '+2 weeks');
         $endDateTime = Carbon::instance($startDateTime)->addHours($this->faker->numberBetween(1, 5));
 
-        // Generate a random image URL from Lorem Picsum
-        $imageUrl = 'https://picsum.photos/800/600?random=' . $this->faker->unique()->numberBetween(1, 1000);
+        // Generate a random image URL from event-list-1.jpg to event-list-6.jpg
+        $imageNumber = $this->faker->numberBetween(1, 6);
+        $imageUrl = 'images/event/event-list-' . $imageNumber . '.jpg';
 
         return [
             'title' => $this->faker->sentence,
@@ -44,4 +45,5 @@ class EventFactory extends Factory
             'image' => $imageUrl,
         ];
     }
+
 }

@@ -21,12 +21,21 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-        // Generate a random image URL from Lorem Picsum
-        $imageUrl = 'https://picsum.photos/200/300?random=' . $this->faker->unique()->numberBetween(1, 1000);
+        // Predefined category names and images
+        $categories = [
+            ['name' => 'Food Fest', 'image' => 'images/cat-1.png'],
+            ['name' => 'Concert', 'image' => 'images/cat-2.png'],
+            ['name' => 'Movie Fest', 'image' => 'images/cat-3.png'],
+            ['name' => 'Magic Show', 'image' => 'images/cat-4.png'],
+            ['name' => 'Art & Craft', 'image' => 'images/cat-5.png'],
+        ];
+
+        // Randomly select a category from the predefined list
+        $category = $this->faker->randomElement($categories);
 
         return [
-            'name' => $this->faker->word,
-            'image' => $imageUrl,
+            'name' => $category['name'],
+            'image' => $category['image'],
         ];
     }
 }

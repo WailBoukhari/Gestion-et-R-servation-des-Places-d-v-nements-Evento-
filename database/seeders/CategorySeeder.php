@@ -15,7 +15,7 @@ class CategorySeeder extends Seeder
     public function run()
     {
         // Create three event categories
-        $categories = Category::factory()->count(3)->create();
+        $categories = Category::factory()->count(5)->create();
 
         // For each category, create an event and associate it with the category
         foreach ($categories as $category) {

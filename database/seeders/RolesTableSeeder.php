@@ -31,7 +31,6 @@ class RolesTableSeeder extends Seeder
 
         $userRole = Role::firstOrCreate(['name' => 'user']);
         $userRole->givePermissionTo([
-            'reserve events',
             'cancel reservations',
             'manage reservations'
         ]);

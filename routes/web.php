@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -22,9 +24,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::get('/', [MainController::class, 'home'])->name('home');
+Route::get('/events/{event}/show', [MainController::class, 'show'])->name('event.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -77,7 +79,8 @@ Route::middleware('auth')->group(function () {
     })->name('user.dashboard');
     Route::get('/user/reservations', [ReservationController::class, 'indexUsr'])->name('user.reservations.index');
     Route::delete('/user/reservations/{reservations}', [ReservationController::class, 'destroy'])->name('user.reservations.destroy');
-
+    //revervation
+    Route::post('/events/{event}/reserve', [ReservationController::class, 'reserve'])->name('events.reserve');
 
 });
 
@@ -86,8 +89,7 @@ Route::get('/events/search/ajax', [EventController::class, 'searchAjax'])->name(
 Route::get('/events/search/result', [EventController::class, 'searchResult'])->name('events.searchResult');
 
 
-//revervation
-Route::post('/events/{event}/reserve', [ReservationController::class, 'reserve'])->name('events.reserve');
+
 
 require __DIR__ . '/auth.php';
 

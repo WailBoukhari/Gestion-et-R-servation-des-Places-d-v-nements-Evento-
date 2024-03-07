@@ -8,6 +8,8 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ReservationController extends Controller
 {
@@ -33,14 +35,8 @@ class ReservationController extends Controller
 
         return view('user.reservation.index', compact('reservations'));
     }
-
     public function reserve(Event $event)
     {
-        // Check if the user has permission to reserve events
-        if (!auth()->user()->hasPermissionTo('reserve events')) {
-            abort(403, 'Unauthorized action.');
-        }
-
         $existingReservation = Reservation::where('event_id', $event->id)
             ->where('user_id', auth()->id())
             ->first();
@@ -57,12 +53,21 @@ class ReservationController extends Controller
             'accepted' => $accepted,
         ]);
 
+        // Generate QR code containing reservation data
+        $qrCode = QrCode::size(200)->generate($reservation->toJson());
+        $qrCodePath = 'qr-codes/' . uniqid() . '.png';
+        Storage::disk('public')->put($qrCodePath, $qrCode);
+        $reservation->qr_code = $qrCodePath;
+
+        // Save the QR code path to the reservation record
+        $reservation->update(['qr_code' => $qrCodePath]);
+
         if ($event->auto_accept_reservation) {
             return view('reservation.auto_accepted', ['reservation' => $reservation]);
         } else {
             return view('reservation.manual_review', ['event' => $event, 'reservation' => $reservation]);
         }
-    }
+    }   
 
     public function destroy(Reservation $reservation)
     {

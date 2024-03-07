@@ -26,7 +26,6 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'create events']);
         Permission::create(['name' => 'edit events']);
         Permission::create(['name' => 'delete events']);
-        Permission::create(['name' => 'reserve events']);
 
         // Define permissions for managing reservations
         Permission::create(['name' => 'manage reservations']);

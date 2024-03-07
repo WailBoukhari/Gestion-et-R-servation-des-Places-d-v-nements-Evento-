@@ -157,7 +157,7 @@ class EventController extends Controller
             $eventsQuery->where('category_id', $categoryId);
         }
 
-        $events = $eventsQuery->paginate(10);
+        $events = $eventsQuery->paginate(6);
 
         $categories = Category::all();
 
