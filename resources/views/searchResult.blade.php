@@ -78,13 +78,27 @@
                                     <div class="event-desc">
                                         <p>{{ $event->description }}</p>
                                     </div>
-                                    <form action="{{ route('events.reserve', $event) }}" method="POST">
-                                        @csrf
-                                        <button type="submit"
-                                            class="ticket-link">
-                                            Make Reservation
+                                    @if ($event->available_seats > 0)
+                                <form action="{{ route('events.reserve', $event) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="ticket-link">
+                                                Make Reservation
+                                            </button>
+                                        </form>
+                                    @else
+                                        <button type="submit" class="ticket-link" disabled>
+                                            Sorry no available places
                                         </button>
-                                    </form>
+                                    @endif
+                                    @if ($event->auto_accept_reservation)
+                                        <div class="event-price py-2">
+                                            <span class="cat">Auto</span>
+                                        </div>
+                                    @else
+                                        <div class="event-price py-2">
+                                            <span class="cat">Manual</span>
+                                        </div>
+                                    @endif
                                 </div>
                                 <span
                                     class="event-time"><span><span>{{ $event->start_time->format('d') }}</span>{{ $event->start_time->format('M') }}</span></span>

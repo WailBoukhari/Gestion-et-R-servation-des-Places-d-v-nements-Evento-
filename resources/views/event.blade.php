@@ -102,16 +102,22 @@
                         <!-- Event Single Sidebar Start -->
                         <div class="event-single-sidebar">
                             <div class="btn-price">
+                                @if ($event->available_seats > 0)
                                 <form action="{{ route('events.reserve', $event) }}" method="POST">
-                                    @csrf   
+                                    @csrf
                                     <button type="submit" class="btn btn-primary p-3">Get Ticket Now</button>
                                 </form>
+                                @else
+                                    <button type="submit" class="ticket-link" disabled>
+                                        Sorry no available places
+                                    </button>
+                                @endif
                             </div>
                         </div>
                         <div class="sidebar-item">
 
-                            <div class="event-details">
-                                <h3 class="sidebar-title">Details</h3>
+                            <div class="event-details p-4">
+                                <h3 class="sidebar-title pl-4">Details</h3>
                                 <ul>
                                     <li>
                                         <h5 class="title">Start:</h5>

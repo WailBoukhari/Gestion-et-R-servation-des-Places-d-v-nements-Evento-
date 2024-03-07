@@ -39,9 +39,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+
+    Route::get('/admin/dashboard', [MainController::class, 'adminDashboard'])->name('admin.dashboard');
+
     // user
     Route::get('users', [UserController::class, 'index'])->name('admin.users.index');
     Route::put('/admin/users/{user}/suspend', [UserController::class, 'suspend'])->name('admin.users.suspend');
@@ -60,9 +60,9 @@ Route::middleware('auth')->group(function () {
 
 });
 Route::middleware('auth')->group(function () {
-    Route::get('/organizer/dashboard', function () {
-        return view('organizer.dashboard');
-    })->name('organizer.dashboard');
+
+    Route::get('/organizer/dashboard', [MainController::class, 'organizerDashboard'])->name('organizer.dashboard');
+
     Route::get('/organizer/events', [EventController::class, 'indexOrg'])->name('organizer.events.index');
     Route::get('/organizer/events/create', [EventController::class, 'create'])->name('organizer.events.create');
     Route::post('/organizer/events', [EventController::class, 'store'])->name('organizer.events.store');
@@ -78,7 +78,7 @@ Route::middleware('auth')->group(function () {
         return view('user.dashboard');
     })->name('user.dashboard');
     Route::get('/user/reservations', [ReservationController::class, 'indexUsr'])->name('user.reservations.index');
-    Route::delete('/user/reservations/{reservations}', [ReservationController::class, 'destroy'])->name('user.reservations.destroy');
+    Route::delete('/user/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('user.reservations.destroy');
     //revervation
     Route::post('/events/{event}/reserve', [ReservationController::class, 'reserve'])->name('events.reserve');
 

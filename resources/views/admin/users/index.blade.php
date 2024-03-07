@@ -53,14 +53,14 @@
                                             @csrf
                                             @method('PUT')
                                             <button type="submit"
-                                                class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out">Activate</button>
+                                                class="bg-green-500 hover:bg-green-600 text-white font-semibold py-1 px-3 rounded transition duration-300 ease-in-out">Activate</button>
                                         </form>
                                     @else
                                         <form action="{{ route('admin.users.suspend', $user) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <button type="submit"
-                                                class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition duration-300 ease-in-out">Suspend</button>
+                                                class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded transition duration-300 ease-in-out">Suspend</button>
                                         </form>
                                     @endif
                                 </td>

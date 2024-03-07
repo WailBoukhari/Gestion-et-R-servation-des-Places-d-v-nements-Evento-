@@ -16,7 +16,7 @@
                             <span class="block sm:inline">{{ session('success') }}</span>
                         </div>
                     @endif
-                    <a href="{{ route('organizer.events.create') }}" class="btn btn-primary mb-3">Create Event</a>
+                    <a href="{{ route('organizer.events.create') }}" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded mb-3 inline-block">Create Event</a>
 
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-gray-50 dark:bg-gray-700">
@@ -53,13 +53,11 @@
                                     <td class="dark:text-white">{{ $event->validated ? 'Yes' : 'No' }}</td>
                                     <td>
                                         <a href="{{ route('organizer.events.edit', $event) }}"
-                                            class="btn btn-sm btn-primary">Edit</a>
-                                        <form action="{{ route('organizer.events.destroy', $event) }}" method="POST"
-                                            class="d-inline">
+                                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-5 my-1 rounded inline-block">Edit</a>
+                                        <form action="{{ route('organizer.events.destroy', $event) }}" method="POST" class="inline-block">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger"
-                                                onclick="return confirm('Are you sure you want to delete this event?')">Delete</button>
+                                            <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold my-1 py-1 px-3 rounded" onclick="return confirm('Are you sure you want to delete this event?')">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

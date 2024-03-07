@@ -33,8 +33,14 @@ class Event extends Model
     }
     public function organizer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'organizer_id');
     }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+    
     public function getImageUrlAttribute()
     {
         return $this->image ? asset('storage/' . $this->image) : null;

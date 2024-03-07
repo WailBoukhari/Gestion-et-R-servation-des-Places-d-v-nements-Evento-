@@ -23,13 +23,13 @@
                                 <p><strong>Start Time:</strong> {{ $reservation->event->start_time }}</p>
                                 <p><strong>End Time:</strong> {{ $reservation->event->end_time }}</p>
                                 <p><strong>Location:</strong> {{ $reservation->event->location }}</p>
-                                <div class="text-center">
-                                    <img src="{{ asset('storage/' . $reservation->qr_code) }}" alt="QR Code"
-                                        id="qr-code-image" class="w-48 h-48 m-auto shadow-lg rounded-lg">
+                                <div class="text-center py-5">
+                                    <img src="{{ asset($reservation->qr_code) }}" alt="QR Code" id="qr-code-image"
+                                        class="w-48 h-48 m-auto shadow-lg rounded-lg">
                                 </div>
+
                                 <!-- Button to go to user's reservations -->
-                                <form action="{{ route('user.reservations.index') }}" method="POST">
-                                    @csrf
+                                <form action="{{ route('user.reservations.index') }}" method="GET">
                                     <button type="submit" class="btn btn-primary">
                                         Go To Your Reservation
                                     </button>

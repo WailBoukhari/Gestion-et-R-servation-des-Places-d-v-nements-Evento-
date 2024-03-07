@@ -5,10 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Reservation;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ReservationController extends Controller
@@ -30,13 +26,17 @@ class ReservationController extends Controller
         $user = auth()->user();
 
         $reservations = Reservation::where('user_id', $user->id)
-            ->where('accepted', false)
             ->get();
 
         return view('user.reservation.index', compact('reservations'));
     }
+
+
     public function reserve(Event $event)
     {
+        if (!auth()->user()->hasPermissionTo('make reservation')) {
+            abort(403, 'Unauthorized action.');
+        }
         $existingReservation = Reservation::where('event_id', $event->id)
             ->where('user_id', auth()->id())
             ->first();
@@ -44,30 +44,26 @@ class ReservationController extends Controller
         if ($existingReservation) {
             return view('reservation.already_reserved', ['event' => $event, 'reservation' => $existingReservation]);
         }
-
         $accepted = $event->auto_accept_reservation;
-
         $reservation = Reservation::create([
             'event_id' => $event->id,
             'user_id' => auth()->id(),
             'accepted' => $accepted,
         ]);
 
-        // Generate QR code containing reservation data
         $qrCode = QrCode::size(200)->generate($reservation->toJson());
-        $qrCodePath = 'qr-codes/' . uniqid() . '.png';
-        Storage::disk('public')->put($qrCodePath, $qrCode);
-        $reservation->qr_code = $qrCodePath;
 
-        // Save the QR code path to the reservation record
+        $qrCodePath = 'qrcodes/' . $reservation->id . '.png';
+        QrCode::size(200)->format('png')->generate($reservation->toJson(), public_path($qrCodePath));
+
         $reservation->update(['qr_code' => $qrCodePath]);
-
+        $event->decrement('available_seats');
         if ($event->auto_accept_reservation) {
             return view('reservation.auto_accepted', ['reservation' => $reservation]);
         } else {
             return view('reservation.manual_review', ['event' => $event, 'reservation' => $reservation]);
         }
-    }   
+    }
 
     public function destroy(Reservation $reservation)
     {

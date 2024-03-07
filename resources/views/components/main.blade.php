@@ -39,9 +39,9 @@
                     <div class="header-wrap">
                         <!-- Header Logo Start -->
                         <div class="header-logo header-logo-3">
-                            <a class="logo-black" href="{{ asset('index.html') }}"><img
+                            <a class="logo-black" href="{{ route('home') }}"><img
                                     src="{{ asset('images/logo-3.png') }}" alt="Logo"></a>
-                            <a class="logo-white" href="{{ asset('index.html') }}"><img
+                            <a class="logo-white" href="{{ route('home') }}"><img
                                     src="{{ asset('images/logo-4.png') }}" alt="Logo"></a>
 
                         </div>

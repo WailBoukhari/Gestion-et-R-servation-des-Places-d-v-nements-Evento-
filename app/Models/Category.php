@@ -9,9 +9,5 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
-    public function getImageUrlAttribute()
-    {
-        return $this->image ? asset('storage/' . $this->image) : null;
-    }
+    protected $fillable = ['name' , 'image'];
 }

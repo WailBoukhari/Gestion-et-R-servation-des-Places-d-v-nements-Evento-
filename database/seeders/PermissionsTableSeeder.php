@@ -31,7 +31,8 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'manage reservations']);
         Permission::create(['name' => 'accept reservations']);
         Permission::create(['name' => 'cancel reservations']);
-
+        Permission::create(['name' => 'make reservation']);
+        
         // Define permissions for managing users
         Permission::create(['name' => 'manage users']);
         Permission::create(['name' => 'suspend users']);

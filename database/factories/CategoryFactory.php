@@ -25,7 +25,7 @@ class CategoryFactory extends Factory
         $categories = [
             ['name' => 'Food Fest', 'image' => 'images/cat-1.png'],
             ['name' => 'Concert', 'image' => 'images/cat-2.png'],
-            ['name' => 'Movie Fest', 'image' => 'images/cat-3.png'],
+            ['name' => 'Movie', 'image' => 'images/cat-3.png'],
             ['name' => 'Magic Show', 'image' => 'images/cat-4.png'],
             ['name' => 'Art & Craft', 'image' => 'images/cat-5.png'],
         ];
