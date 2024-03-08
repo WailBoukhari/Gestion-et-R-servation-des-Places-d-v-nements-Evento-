@@ -13,7 +13,7 @@ class MainController extends Controller
     public function home() {
 
         $categories = Category::all();
-        $featuredEvents = Event::inRandomOrder()->limit(6)->get();
+        $featuredEvents = Event::inRandomOrder()->limit(8)->get();
 
         return view('home' , compact('categories' , 'featuredEvents'));
 

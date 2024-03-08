@@ -43,6 +43,10 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    {{-- <div class="form-group">
+                                        <label for="date">Select Date:</label>
+                                        <input type="date" id="date" name="date" class="form-control">
+                                    </div> --}}
                                 </form>
                             </div>
                         </div>
@@ -79,7 +83,7 @@
                                         <p>{{ $event->description }}</p>
                                     </div>
                                     @if ($event->available_seats > 0)
-                                <form action="{{ route('events.reserve', $event) }}" method="POST">
+                                        <form action="{{ route('events.reserve', $event) }}" method="POST">
                                             @csrf
                                             <button type="submit" class="ticket-link">
                                                 Make Reservation
@@ -128,5 +132,10 @@
             // Submit the form when the category selection changes
             $('#searchForm').submit();
         });
+        //      // Add change event listener to the date select input
+        // $('#date').on('change', function() {
+        //     // Submit the form when the date selection changes
+        //     $('#searchForm').submit();
+        // });
     });
 </script>

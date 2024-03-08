@@ -39,10 +39,10 @@
                     <div class="header-wrap">
                         <!-- Header Logo Start -->
                         <div class="header-logo header-logo-3">
-                            <a class="logo-black" href="{{ route('home') }}"><img
-                                    src="{{ asset('images/logo-3.png') }}" alt="Logo"></a>
-                            <a class="logo-white" href="{{ route('home') }}"><img
-                                    src="{{ asset('images/logo-4.png') }}" alt="Logo"></a>
+                            <a class="logo-black" href="{{ route('home') }}"><img style="width: 69%;" src="{{ asset('images/black.png') }}"
+                                    alt="Logo"></a>
+                            <a class="logo-white" href="{{ route('home') }}"><img style="width: 69%;" src="{{ asset('images/white.png') }}"
+                                    alt="Logo"></a>
 
                         </div>
                         <!-- Header Logo End -->
@@ -61,11 +61,12 @@
                                                 <a href="{{ route('organizer.dashboard') }}" class="btn-2">Dashboard</a>
                                             @endrole
                                             @role('user')
-                                                <a href="{{ route('user.dashboard') }}" class="fbtn-2">Dashboard</a>
+                                                <a href="{{ route('user.dashboard') }}" class="btn-2">Dashboard</a>
                                             @endrole
                                         @else
                                             <a href="{{ route('login') }}" class="btn-2">Log
-                                                in / Register</a>
+                                                in</a>
+                                            <a href="{{ route('register') }}" class="btn-2">Register</a>
                                         @endauth
                                     </div>
                                 @endif
@@ -95,7 +96,7 @@
         <main class="main-wrapper">
             {{ $slot }}
         </main>
-         <!-- Footer Start -->
+        <!-- Footer Start -->
         <div class="meeta-footer-5" style="background-image: url({{ asset('images/bg/footer-5-bg.jpg') }});">
 
             <!-- Footer Widget Start -->
@@ -104,7 +105,7 @@
 
                     <!-- Footer Logo Start -->
                     <div class="footer-logo">
-                        <a href="index.html"><img src="{{ asset('images/footer-logo-1.png') }}" alt="Logo"></a>
+                        <a href="index.html"><img src="{{ asset('images/white.png') }}" alt="Logo"></a>
                     </div>
                     <!-- Footer Logo End -->
 

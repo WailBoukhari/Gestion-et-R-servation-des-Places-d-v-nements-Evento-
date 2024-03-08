@@ -148,6 +148,7 @@ class EventController extends Controller
     {
         $query = $request->input('query');
         $categoryId = $request->input('category');
+        // $date = $request->input('date');
 
         $eventsQuery = Event::query();
         if (!empty($query)) {
@@ -157,6 +158,9 @@ class EventController extends Controller
             $eventsQuery->where('category_id', $categoryId);
         }
 
+        // if (!empty($date)) {
+        //     $eventsQuery->whereDate('date', $date);
+        // }
         $events = $eventsQuery->paginate(6);
 
         $categories = Category::all();
@@ -165,6 +169,5 @@ class EventController extends Controller
 
         return view('searchResult', compact('events', 'query', 'categories', 'selectedCategory'));
     }
-
 
 }

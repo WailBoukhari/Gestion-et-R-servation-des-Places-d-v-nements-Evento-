@@ -10,6 +10,12 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
+                    <form action="{{ route('remove.user.role') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded mt-4">
+                            Click Here If You Want To Become A Organizer
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

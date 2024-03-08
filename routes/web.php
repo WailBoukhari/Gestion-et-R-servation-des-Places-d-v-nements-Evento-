@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
 
@@ -81,6 +82,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/user/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('user.reservations.destroy');
     //revervation
     Route::post('/events/{event}/reserve', [ReservationController::class, 'reserve'])->name('events.reserve');
+    Route::post('/change-user-role', [UserController::class, 'changeUserRole'])->name('remove.user.role');
 
 });
 
@@ -89,7 +91,9 @@ Route::get('/events/search/ajax', [EventController::class, 'searchAjax'])->name(
 Route::get('/events/search/result', [EventController::class, 'searchResult'])->name('events.searchResult');
 
 
-
+// social login routes
+Route::get('/redirect/google', [AuthenticatedSessionController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('/auth/google/callback', [AuthenticatedSessionController::class, 'handleGoogleCallback'])->name('google.callback');
 
 require __DIR__ . '/auth.php';
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -49,5 +51,20 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'User activated successfully');
+    }
+    public function changeUserRole(Request $request)
+    {
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Remove the current role (assuming it's 'user')
+        $user->removeRole('user');
+
+        // Assign the organizer role
+        $organizerRole = Role::where('name', 'organizer')->first();
+        $user->assignRole($organizerRole);
+
+        // Redirect back to the dashboard or any other page
+        return redirect()->route('organizer.dashboard');
     }
 }
