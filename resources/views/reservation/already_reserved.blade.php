@@ -19,21 +19,28 @@
                         <div class="card-body">
                             <p class="lead text-center mb-4">You Already Made Your Reservation!</p>
                             <div class="text-center">
-                                <p><strong>Event Name:</strong> {{ $reservation->event->title }}</p>
-                                <p><strong>Start Time:</strong> {{ $reservation->event->start_time }}</p>
-                                <p><strong>End Time:</strong> {{ $reservation->event->end_time }}</p>
-                                <p><strong>Location:</strong> {{ $reservation->event->location }}</p>
-                                <div class="text-center py-5">
-                                    <img src="{{ asset($reservation->qr_code) }}" alt="QR Code" id="qr-code-image"
-                                        class="w-48 h-48 m-auto shadow-lg rounded-lg">
+                                <div class="card-body">
+                                    <p class="lead text-center mb-4">Your reservation request has been received. It will
+                                        be reviewed by the event organizer.</p>
+                                    <div class="text-center">
+                                        <div>
+                                            <!-- Button to go to user's reservations -->
+                                            <form action="{{ route('user.reservations.index') }}" method="GET"
+                                                class="d-inline">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Go To Your Reservation
+                                                </button>
+                                            </form>
+                                            <!-- Button to go to searchResults -->
+                                            <form action="{{ route('events.searchResult') }}" method="GET"
+                                                class="d-inline">
+                                                <button type="submit" class="btn btn-secondary">
+                                                    Go To Search Results
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <!-- Button to go to user's reservations -->
-                                <form action="{{ route('user.reservations.index') }}" method="GET">
-                                    <button type="submit" class="btn btn-primary">
-                                        Go To Your Reservation
-                                    </button>
-                                </form>
                             </div>
                         </div>
                     </div>

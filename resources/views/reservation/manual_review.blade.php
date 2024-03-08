@@ -20,12 +20,21 @@
                             <p class="lead text-center mb-4">Your reservation request has been received. It will be
                                 reviewed by the event organizer.</p>
                             <div class="text-center">
-                                <form action="{{ route('user.reservations.index') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary">
-                                        Go To Your Reservation
-                                    </button>
-                                </form>
+                                <div>
+                                    <!-- Button to go to user's reservations -->
+                                    <form action="{{ route('user.reservations.index') }}" method="GET"
+                                        class="d-inline">
+                                        <button type="submit" class="btn btn-primary">
+                                            Go To Your Reservation
+                                        </button>
+                                    </form>
+                                    <!-- Button to go to searchResults -->
+                                    <form action="{{ route('events.searchResult') }}" method="GET" class="d-inline">
+                                        <button type="submit" class="btn btn-secondary">
+                                            Go To Search Results
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

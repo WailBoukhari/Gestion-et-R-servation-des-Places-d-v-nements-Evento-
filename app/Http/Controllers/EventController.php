@@ -150,13 +150,14 @@ class EventController extends Controller
         $categoryId = $request->input('category');
         // $date = $request->input('date');
 
-        $eventsQuery = Event::query();
+        $eventsQuery = Event::query()->where('validated', true);
         if (!empty($query)) {
             $eventsQuery->where('title', 'like', "%$query%");
         }
         if (!empty($categoryId)) {
             $eventsQuery->where('category_id', $categoryId);
         }
+
 
         // if (!empty($date)) {
         //     $eventsQuery->whereDate('date', $date);

@@ -49,8 +49,8 @@
                                         {{ $reservation->event->organizer->name }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $reservation->accepted ? 'bg-green-600 text-green-100' : 'bg-red-600 text-red-100' }}">
-                                            {{ $reservation->accepted ? 'Accepted' : 'Not Accepted' }}
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $reservation->accepted ? 'bg-green-600 text-green-100' : 'bg-red-600 text-yellow-100' }}">
+                                            {{ $reservation->accepted ? 'Accepted' : 'Waiting' }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">

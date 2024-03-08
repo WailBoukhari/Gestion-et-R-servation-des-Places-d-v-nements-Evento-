@@ -23,16 +23,15 @@ class EventFactory extends Factory
      */
     public function definition()
     {
-        // Get a random user who will act as the organizer
         $organizerId = User::role('organizer')->inRandomOrder()->first()->id;
 
-        // Generate random start and end times for the event
         $startDateTime = $this->faker->dateTimeBetween('+1 week', '+2 weeks');
         $endDateTime = Carbon::instance($startDateTime)->addHours($this->faker->numberBetween(1, 5));
 
-        // Generate a random image URL from event-list-1.jpg to event-list-6.jpg
         $imageNumber = $this->faker->numberBetween(1, 6);
         $imageUrl = 'images/event/event-list-' . $imageNumber . '.jpg';
+
+        $accepted = $this->faker->boolean;
 
         return [
             'title' => $this->faker->sentence,
@@ -42,8 +41,11 @@ class EventFactory extends Factory
             'location' => $this->faker->address,
             'available_seats' => $this->faker->numberBetween(50, 200),
             'organizer_id' => $organizerId,
+            'validated' => true,
             'image' => $imageUrl,
+            'auto_accept_reservation' => $accepted,
         ];
+
     }
 
 }
